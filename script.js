@@ -1,8 +1,20 @@
 const langToggle = document.getElementById('lang-toggle');
+function setLanguage(lang) {
+  document.documentElement.lang = lang;
+  langToggle.textContent = lang === 'en' ? 'ES' : 'EN';
+  document.querySelectorAll('[lang="en"]').forEach(el => {
+    el.style.display = lang === 'en' ? '' : 'none';
+  });
+  document.querySelectorAll('[lang="es"]').forEach(el => {
+    el.style.display = lang === 'es' ? '' : 'none';
+  });
+}
+// Initialize on page load
+setLanguage(document.documentElement.lang || 'en');
 if (langToggle) {
   langToggle.addEventListener('click', () => {
-    document.documentElement.lang = document.documentElement.lang === 'en' ? 'es' : 'en';
-    langToggle.textContent = document.documentElement.lang === 'en' ? 'ES' : 'EN';
+    const newLang = document.documentElement.lang === 'en' ? 'es' : 'en';
+    setLanguage(newLang);
   });
 }
 
